@@ -30,11 +30,11 @@ var | purpose | default
 
 ```
 # netclip help
-usage: /clip [cmd]
+usage: /netclip [cmd]
 
   basics:
     export cliphost=hostname.domainname
-    ssh -l clippy -p 11922 ${cliphost} /clip install | bash
+    ssh -l clippy -p 11922 ${cliphost} /netclip install | bash
     cat ~/.bin/id_rsa.pub | netclip addkey
     echo hello | sc
     sp
@@ -104,19 +104,19 @@ docker logs netclip | awk -F: '/^pass:/{print $NF}' | head -1 | tr -d ' '
 the ssh/vnc password can be shown using the `showpass` command as well
 
 ```
-docker exec --user clippy netclip /clip showpass
+docker exec --user clippy netclip /netclip showpass
 ```
 
 the ssh password can be reset from the docker host where netclip is running
 
 ```
-docker exec --user clippy netclip sh -c 'echo SuperSecretNEWp@55W0rD+ | /clip setpass'
+docker exec --user clippy netclip sh -c 'echo SuperSecretNEWp@55W0rD+ | /netclip setpass'
 ```
 
 the password file can be removed
 
 ```
-docker exec --user clippy netclip /clip delpass
+docker exec --user clippy netclip /netclip delpass
 ```
 
 ## add an ssh key
@@ -126,13 +126,13 @@ substitute username/port/hostname below
 enter password when prompted
 
 ```
-cat ~/.ssh/id_rsa.pub | ssh -l clippy -p 11922 hostname /clip addkey
+cat ~/.ssh/id_rsa.pub | ssh -l clippy -p 11922 hostname /netclip addkey
 ```
 
 test keys with
 
 ```
-ssh -l clippy -p 11922 hostname /clip help
+ssh -l clippy -p 11922 hostname /netclip help
 ```
 
 ## get scripts
@@ -141,14 +141,14 @@ automatic install
 
 ```
 export cliphost=hostname
-ssh -l clippy -p 11922 ${cliphost} /clip install | bash
+ssh -l clippy -p 11922 ${cliphost} /netclip install | bash
 ```
 
 manual install
 
 ```
 export cliphost=hostname
-ssh -l clippy -p 11922 ${cliphost} /clip netclip > ~/bin/netclip
+ssh -l clippy -p 11922 ${cliphost} /netclip netclip > ~/bin/netclip
 chmod 755 ~/bin/netclip
 ~/bin/netclip sc > ~/bin/sc
 ~/bin/netclip sp > ~/bin/sp
@@ -182,10 +182,10 @@ git checkout master
 cd alpine-netclip
 docker build --tag netclip .
 docker run -d --restart always --name netclip -p 11922:11922 netclip
-docker exec --user clippy netclip /clip delpass
+docker exec --user clippy netclip /netclip delpass
 docker cp ~/.ssh/id_rsa.pub netclip:/tmp/key.pub
-docker exec --user clippy netclip bash -c 'cat /tmp/key.pub | /clip addkey'
-docker exec --user clippy netclip /clip install | bash
+docker exec --user clippy netclip bash -c 'cat /tmp/key.pub | /netclip addkey'
+docker exec --user clippy netclip /netclip install | bash
 for h in h01 h02 h03 ; do
   ssh $h cat .ssh/id_rsa.pub | netclip addkey
   netclip install | ssh $h

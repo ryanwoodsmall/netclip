@@ -21,7 +21,7 @@ COPY dropbear.sh /
 COPY xvfb.sh /
 COPY x11vnc.sh /
 COPY startup.sh /
-COPY clip /
+COPY netclip /
 
 RUN chmod 755 /*.sh \
     && apk --no-cache update \
@@ -29,7 +29,9 @@ RUN chmod 755 /*.sh \
     && apk --no-cache add bash coreutils busybox-extras busybox-initscripts dropbear file openbox openssh-keygen openssl procps psmisc sudo tini vim x11vnc xclip xinit xsetroot xterm xvfb \
     && rm -f /bin/sh \
     && ln -s /bin/bash /bin/sh \
-    && ln -s /clip /usr/bin/ \
+    && ln -s /netclip /clip \
+    && ln -s /netclip /usr/bin/ \
+    && ln -s /netclip /usr/bin/clip \
     && sed -i.ORIG '/^root:/s#/bin/ash#/bin/bash#g' /etc/passwd \
     && mkdir -p /etc/dropbear ${clipdata} \
     && sed -i.ORIG "/^wheel:/s/:root/:root,${clipuser}/g" /etc/group \

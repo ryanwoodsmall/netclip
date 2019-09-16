@@ -5,7 +5,7 @@ set -eu
 pf="/etc/profile.d/clip.sh"
 test -e ${pf} && . ${pf} || true
 : ${clipdata:="/data/clip"}
-: ${clipprog:="/clip"}
+: ${clipprog:="/netclip"}
 test -e ${clipdata}/clipscreen || {
   echo "${clipprog}: ${clipdata}/clipscreen not found" 1>&2
   exit 1
@@ -93,7 +93,7 @@ function usage() {
   echo
   echo "  basics:"
   echo "    export cliphost=hostname.domainname"
-  echo "    ssh -l clippy -p 11922 \${cliphost} /clip install | bash"
+  echo "    ssh -l clippy -p 11922 \${cliphost} ${clipprog} install | bash"
   echo "    cat ~/.bin/id_rsa.pub | netclip addkey"
   echo "    echo hello | sc"
   echo "    sp"
