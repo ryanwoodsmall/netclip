@@ -176,7 +176,9 @@ bootstrapping keys is relatively simple assuming they're exchanged with the netc
 
 ```
 git clone https://github.com/ryanwoodsmall/dockerfiles.git
-cd dockerfiles/alpine-netclip
+git submodule init
+git submodule update
+cd alpine-netclip
 docker build --tag netclip .
 docker run -d --restart always --name netclip -p 11922:11922 netclip
 docker exec --user clippy netclip /clip delpass
@@ -204,7 +206,6 @@ done
 - ability to update: clip script, startup .sh scripts, and dropbear packages
 - peel out unnecessary/big packages
 - clear on read, i.e. delete the clipboard when paste
-- move clip to its own netclip git project/repo? probably not for now
 - something more "enterprise-y" on centos/rhel w/auth (pam, ldap, kerberos, ...) stuff built in
 - service discovery for user/host/port (mdns? other broadcast?)
 - gui???
