@@ -178,6 +178,7 @@ bootstrapping keys is relatively simple assuming they're exchanged with the netc
 git clone https://github.com/ryanwoodsmall/dockerfiles.git
 git submodule init
 git submodule update
+git checkout master
 cd alpine-netclip
 docker build --tag netclip .
 docker run -d --restart always --name netclip -p 11922:11922 netclip
