@@ -35,7 +35,7 @@ usage: /netclip [cmd]
   basics:
     export cliphost=hostname.domainname
     ssh -l clippy -p 11922 ${cliphost} /netclip install | bash
-    cat ~/.bin/id_rsa.pub | netclip addkey
+    cat ~/.ssh/id_rsa.pub | netclip addkey
     echo hello | sc
     sp
     cat /tmp/in.txt | netclip copy ; ssh remote 'netclip paste > /tmp/out.txt'

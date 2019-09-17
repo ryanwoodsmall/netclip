@@ -94,7 +94,7 @@ function usage() {
   echo "  basics:"
   echo "    export cliphost=hostname.domainname"
   echo "    ssh -l clippy -p 11922 \${cliphost} ${clipprog} install | bash"
-  echo "    cat ~/.bin/id_rsa.pub | netclip addkey"
+  echo "    cat ~/.ssh/id_rsa.pub | netclip addkey"
   echo "    echo hello | sc"
   echo "    sp"
   echo "    cat /tmp/in.txt | netclip copy ; ssh remote 'netclip paste > /tmp/out.txt'"
