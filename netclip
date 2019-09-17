@@ -188,7 +188,7 @@ is_macos() {
   uname -s | grep -qi \"^darwin\"
 }
 is_windows() {
-  uname -s | egrep -qi \"(^(CYGWIN|MINGW|MSYS)|win|nt)\"
+  uname.exe -s | egrep -qi \"(^(CYGWIN|MINGW)|MSYS|win|nt)\"
 }
 is_wsl() {
   uname -r | grep -q -- \"-Microsoft$\"
@@ -270,7 +270,13 @@ localclip -o
 
 function copysync() {
   echo "$(scriptcommon)
-tee >(sc) | localclip -i -s
+# no process substitution on mingw/msys? (git bash)
+if \$(hash uname.exe >/dev/null 2>&1 && uname.exe -s | egrep -qi \"(MINGW|NT|MSYS)\") ; then
+  tee | localclip -i
+  localclip -o | sc
+else
+  tee >(sc) | localclip -i -s
+fi
 " | dos2unix
 }
 
