@@ -88,7 +88,7 @@ usage: /netclip [cmd]
           unlock: mark the clipboard as read-write
 ```
 
-## building
+## build
 
 ```
 docker build --tag netclip .
@@ -178,7 +178,7 @@ that's it!
 
 once a host's key is in place it has full copy/paste powers as long as the cliphost is reachable
 
-## setting up a bunch of keys at once
+## set up a bunch of keys at once
 
 bootstrapping keys is relatively simple assuming they're exchanged with the netclip host
 
