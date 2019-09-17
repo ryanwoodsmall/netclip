@@ -261,6 +261,7 @@ done
   - settings
   - history/log files
 - ssh server options variable (disable password on dropbear, etc.)
+- ssh client options variable
 - 'clip' local script
   - cliplocal? clipin/clipout?
   - '-s' sychronize x11 clipboard/primary
@@ -271,11 +272,10 @@ done
   - wsl?
   - screen/tmux: copy buffers?
   - clip (w/-i,-o,-s), clipin, clipout
-  - separate out common script headers
   - cliplocal var (xsel, xclip, ...)
 - loadkeys (import keys from dumpkeys)
-- backup grab configs from /data/vnc/?
-- history separation in to YYYY/MM/DD/HH/MM/SS/N nanosecond format
+- backup - grab configs from /data/vnc/?
+- history - separation in to YYYY/MM/DD/HH/MM/SS/N nanosecond format
 
 ### links
 

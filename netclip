@@ -124,39 +124,35 @@ function paste() {
   xclip -verbose -out -selection clipboard 2>/dev/null || true
 }
 
-function sc() {
+function scriptcommon() {
   echo "#!/bin/bash
-: \${clipuser:=${user}}
-: \${clipport:=${clipport}}
-: \${cliphost:=$(hostname -f)}
+: \${clipuser:=\"${user}\"}
+: \${clipport:=\"${clipport}\"}
+: \${cliphost:=\"$(hostname -f)\"}
+: \${clipinst:=\"\${HOME}/bin\"}
+" | dos2unix
+}
+
+function sc() {
+  echo "$(scriptcommon)
 cat /dev/stdin | ssh -l \${clipuser} -p \${clipport} \${cliphost} ${clipprog} copy
 " | dos2unix
 }
 
 function sp() {
-  echo "#!/bin/bash
-: \${clipuser:=${user}}
-: \${clipport:=${clipport}}
-: \${cliphost:=$(hostname -f)}
+  echo "$(scriptcommon)
 ssh -l \${clipuser} -p \${clipport} \${cliphost} ${clipprog} paste
 " | dos2unix
 }
 
 function netclip() {
-  echo "#!/bin/bash
-: \${clipuser:=${user}}
-: \${clipport:=${clipport}}
-: \${cliphost:=$(hostname -f)}
+  echo "$(scriptcommon)
 ssh -l \${clipuser} -p \${clipport} \${cliphost} ${clipprog} \"\${@}\"
 " | dos2unix
 }
 
 function install() {
-  echo "#!/bin/bash
-: \${clipuser:=${user}}
-: \${clipport:=${clipport}}
-: \${cliphost:=$(hostname -f)}
-: \${clipinst:=\"\${HOME}/bin\"}
+  echo "$(scriptcommon)
 mkdir -p \${clipinst}
 rm -f \${clipinst}/{netclip,s{c,p}}
 echo '$(netclip)' > \${clipinst}/netclip
