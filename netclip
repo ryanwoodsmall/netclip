@@ -130,24 +130,26 @@ function scriptcommon() {
 : \${clipport:=\"${clipport}\"}
 : \${cliphost:=\"$(hostname -f)\"}
 : \${clipinst:=\"\${HOME}/bin\"}
+: \${clipssh:=\"ssh\"}
+: \${clipsshopts:=\"-l \${clipuser} -p \${clipport}\"}
 " | dos2unix
 }
 
 function sc() {
   echo "$(scriptcommon)
-cat /dev/stdin | ssh -l \${clipuser} -p \${clipport} \${cliphost} ${clipprog} copy
+cat /dev/stdin | \${clipssh} \${clipsshopts} \${cliphost} ${clipprog} copy
 " | dos2unix
 }
 
 function sp() {
   echo "$(scriptcommon)
-ssh -l \${clipuser} -p \${clipport} \${cliphost} ${clipprog} paste
+\${clipssh} \${clipsshopts} \${cliphost} ${clipprog} paste
 " | dos2unix
 }
 
 function netclip() {
   echo "$(scriptcommon)
-ssh -l \${clipuser} -p \${clipport} \${cliphost} ${clipprog} \"\${@}\"
+\${clipssh} \${clipsshopts} \${cliphost} ${clipprog} \"\${@}\"
 " | dos2unix
 }
 
