@@ -279,6 +279,10 @@ done
 - history - separation in to YYYY/MM/DD/HH/MM/SS/N nanosecond format
 - ssh keys - show fingerprints
 - make sc/sp/etc. script symlinks to netclip client
+- base64 encode everything?
+- gpg sign history?
+- associate clip with ssh pubkey some how
+- stack: clipboard->primary->secondary
 
 ### links
 
