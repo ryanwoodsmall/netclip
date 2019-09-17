@@ -184,10 +184,16 @@ is_linux() {
   uname -s | grep -qi \"^linux\"
 }
 is_macos() {
-  uname -a | grep -qi \"darwin.*xnu\"
+  uname -s | grep -qi \"^darwin\"
 }
 is_windows() {
-  echo huh
+  uname -s | egrep -qi \"(^(CYGWIN|MINGW|MSYS)|win|nt)\"
+}
+is_wsl() {
+  uname -r | grep -q -- \"-Microsoft$\"
+}
+is_bsd() {
+  uname -s | grep -qi bsd
 }
 has_xclip() {
   hash xclip >/dev/null 2>&1
@@ -208,7 +214,10 @@ elif \$(is_chromeos) ; then
     echo \"no osc52.sh found\"
     exit 1
   fi
-elif \$(is_linux) ; then
+elif \$(is_wsl) ; then
+  cincmd=clip.exe
+  coutcmd=\"powershell.exe Get-Clipboard\"
+elif \$(is_linux || is_bsd) ; then
   if \$(has_xclip) ; then
     cincmd=\"xclip -in -selection clipboard\"
     coutcmd=\"xclip -out -selection clipboard\"
@@ -220,7 +229,8 @@ elif \$(is_linux) ; then
     exit 1
   fi
 elif \$(is_windows) ; then
-  echo yep
+  cincmd=clip.exe
+  coutcmd=\"powershell.exe Get-Clipboard\"
 else
   echo \"unhandled platform\"
 fi
