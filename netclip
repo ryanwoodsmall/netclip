@@ -63,6 +63,9 @@ cmdinfo["showhist"]="show the clipboard history status"
 cmdinfo["enautolock"]="enable autolocking the clipboard before copying"
 cmdinfo["disautolock"]="disable autolocking the clipboard before copying"
 cmdinfo["showautolock"]="show the clipboard autolocking status"
+cmdinfo["localclip"]="show localclip script"
+cmdinfo["localclipin"]="show localclip stdin script"
+cmdinfo["localclipout"]="show localclip stdout script"
 
 # selection buffers
 selections=( 'clipboard' 'primary' 'secondary' )
@@ -153,6 +156,105 @@ function netclip() {
 " | dos2unix
 }
 
+function localclip() {
+  echo "$(scriptcommon)
+usage() {
+  echo \"\${0##*/} [-i|-o] [-s]\"
+}
+if [ \${#} -lt 1 ] ; then
+  usage
+  exit 1
+fi
+cincmd=none
+coutcmd=none
+clipmode=i
+clipsync=0
+while getopts :ios opt ; do
+  case \${opt} in
+    i) clipmode=i;;
+    o) clipmode=o;;
+    s) clipsync=1;;
+    *) usage;exit 1;;
+  esac
+done
+is_chromeos() {
+  grep -q \"^CHROMEOS_\" /etc/lsb-release
+}
+is_linux() {
+  uname -s | grep -qi \"^linux\"
+}
+is_macos() {
+  uname -a | grep -qi \"darwin.*xnu\"
+}
+is_windows() {
+  echo huh
+}
+has_xclip() {
+  hash xclip >/dev/null 2>&1
+}
+has_xsel() {
+  hash xsel >/dev/null 2>&1
+}
+has_osc52sh() {
+  hash osc52.sh >/dev/null 2>&1
+}
+if \$(is_macos) ; then
+  cincmd=pbcopy
+  coutcmd=pbpaste
+elif \$(is_chromeos) ; then
+  if \$(has_osc52sh) ; then
+    cincmd=osc52.sh
+  else
+    echo \"no osc52.sh found\"
+  fi
+elif \$(is_linux) ; then
+  if \$(has_xclip) ; then
+    cincmd=\"xclip -in -selection clipboard\"
+    coutcmd=\"xclip -out -selection clipboard\"
+  elif \$(has_xsel) ; then
+    cincmd=\"xsel --input --clipboard\"
+    coutcmd=\"xsel --output --clipboard\"
+  else
+    echo \"no xclip or xsel found\"
+  fi
+elif \$(is_windows) ; then
+  echo yep
+else
+  echo \"unhandled platform\"
+fi
+if [[ \${clipmode} == i ]] ; then
+  if [[ \${cincmd} == none ]] ; then
+    echo \"cannot copy to local clipboard on this platform\"
+    exit 1
+  fi
+  cat /dev/stdin | \${cincmd}
+  if [[ \${clipsync} == 1 ]] ; then
+    if [[ \${cincmd} =~ x(clip|sel) ]] ; then
+      \${coutcmd} | \${cincmd//clipboard/primary}
+    fi
+  fi
+elif [[ \${clipmode} == o ]] ; then
+  if [[ \${coutcmd} == none ]] ; then
+    echo \"cannot paste from local clipboard on this platform\"
+    exit 1
+  fi
+  \${coutcmd}
+fi
+" | dos2unix
+}
+
+function localclipin() {
+  echo "$(scriptcommon)
+cat /dev/stdin | localclip -i
+" | dos2unix
+}
+
+function localclipout() {
+  echo "$(scriptcommon)
+localclip -o
+" | dos2unix
+}
+
 function install() {
   echo "$(scriptcommon)
 mkdir -p \${clipinst}
@@ -160,7 +262,10 @@ rm -f \${clipinst}/{netclip,s{c,p}}
 echo '$(netclip)' > \${clipinst}/netclip
 echo '$(sc)' > \${clipinst}/sc
 echo '$(sp)' > \${clipinst}/sp
-chmod 755 \${clipinst}/{netclip,s{c,p}}
+echo '$(localclip)' > \${clipinst}/localclip
+echo '$(localclipin)' > \${clipinst}/localclipin
+echo '$(localclipout)' > \${clipinst}/localclipout
+chmod 755 \${clipinst}/{netclip,s{c,p},localclip{,{in,out}}}
 " | dos2unix
 }
 

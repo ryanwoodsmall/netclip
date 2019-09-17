@@ -13,20 +13,25 @@ network clipboard built on docker with
 
 ## usage
 
-the `install` command will setup three scripts in `${HOME}/bin`
+the `install` command will setup some scripts in `${HOME}/bin`
 
 - `netclip`: netclip service interaction/control
 - `sc`: shared clipboard copy
 - `sp`: shared clipboard paste
+- `localclip`: local clipboard manager
+- `localclipin`: copy to local clipboard
+- `localclipout`: paste from local clipboard
 
 environment variables
 
 var | purpose | default
 --- | --- | ---
-`clipuser` | netclip ssh user | clippy
-`clipport` | netclip ssh port | 11922
+`clipuser` | netclip ssh user | *clippy*
+`clipport` | netclip ssh port | *11922*
 `cliphost` | netclip hostname/IP | docker container id
 `clipinst` | netclip script installation path | `${HOME}/bin`
+`clipssh` | netclip ssh command to use | `ssh`
+`clipsshopts` | netclip ssh options | `-l ${clipuser} -p ${clipport}`
 
 ```
 # netclip help
@@ -60,6 +65,9 @@ usage: /netclip [cmd]
          install: show install script for netclip/sc/sp
         listhist: list any existing history entries
         listkeys: show known ssh authorized keys
+       localclip: show localclip script
+     localclipin: show localclip stdin script
+    localclipout: show localclip stdout script
             lock: mark the clipboard as read-only
          netclip: show netclip control script
            paste: paste the clipboard to stdout
@@ -218,9 +226,8 @@ done
 - or read-only user? read-only port?
 - lock down ssh command (requires openssh) similar to git
 - remove root user requirement after setup, run as regular user
-- make ssh command configurable
 - ability to turn ssh password auth off
-- ability to update: clip script, startup .sh scripts, and dropbear packages
+- ability to update: netclip script, startup .sh scripts, and dropbear packages
 - peel out unnecessary/big packages
 - clear on read, i.e. delete the clipboard when paste
 - something more "enterprise-y" on centos/rhel w/auth (pam, ldap, kerberos, ...) stuff built in
@@ -260,15 +267,8 @@ done
   - dropbear
   - settings
   - history/log files
-- ssh server options variable (disable password on dropbear, etc.)
-- ssh client options variable
-- 'clip' local script
-  - cliplocal? clipin/clipout?
-  - '-s' sychronize x11 clipboard/primary
-  - x11: xclip (or xsel)
-  - chrome os: osc52.sh
-  - macos: pbcopy/pbpaste
-  - windows: clip.exe, winclip from putty, doit
+- localclip/localclipin/localclipout
+  - windows: clip.exe, `powershell.exe Get-Clipboard`, winclip from putty, doit
   - wsl?
   - screen/tmux: copy buffers?
   - clip (w/-i,-o,-s), clipin, clipout
@@ -276,6 +276,7 @@ done
 - loadkeys (import keys from dumpkeys)
 - backup - grab configs from /data/vnc/?
 - history - separation in to YYYY/MM/DD/HH/MM/SS/N nanosecond format
+- ssh keys - show fingerprints
 
 ### links
 
