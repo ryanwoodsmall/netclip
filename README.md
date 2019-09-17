@@ -21,6 +21,7 @@ the `install` command will setup some scripts in `${HOME}/bin`
 - `localclip`: local clipboard manager
 - `localclipin`: copy to local clipboard
 - `localclipout`: paste from local clipboard
+- `copysync`: copy stdin to both network and local clipboards
 
 environment variables
 
@@ -277,6 +278,7 @@ done
 - backup - grab configs from /data/vnc/?
 - history - separation in to YYYY/MM/DD/HH/MM/SS/N nanosecond format
 - ssh keys - show fingerprints
+- make sc/sp/etc. script symlinks to netclip client
 
 ### links
 

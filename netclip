@@ -66,6 +66,7 @@ cmdinfo["showautolock"]="show the clipboard autolocking status"
 cmdinfo["localclip"]="show localclip script"
 cmdinfo["localclipin"]="show localclip stdin script"
 cmdinfo["localclipout"]="show localclip stdout script"
+cmdinfo["copysync"]="show script to copy to both network and local clipboard"
 
 # selection buffers
 selections=( 'clipboard' 'primary' 'secondary' )
@@ -267,17 +268,24 @@ localclip -o
 " | dos2unix
 }
 
+function copysync() {
+  echo "$(scriptcommon)
+tee >(sc) | localclip -i -s
+" | dos2unix
+}
+
 function install() {
   echo "$(scriptcommon)
 mkdir -p \${clipinst}
-rm -f \${clipinst}/{netclip,s{c,p}}
+rm -f \${clipinst}/{netclip,s{c,p},localclip{,{in,out}},copysync}
 echo '$(netclip)' > \${clipinst}/netclip
 echo '$(sc)' > \${clipinst}/sc
 echo '$(sp)' > \${clipinst}/sp
 echo '$(localclip)' > \${clipinst}/localclip
 echo '$(localclipin)' > \${clipinst}/localclipin
 echo '$(localclipout)' > \${clipinst}/localclipout
-chmod 755 \${clipinst}/{netclip,s{c,p},localclip{,{in,out}}}
+echo '$(copysync)' > \${clipinst}/copysync
+chmod 755 \${clipinst}/{netclip,s{c,p},localclip{,{in,out}},copysync}
 " | dos2unix
 }
 
