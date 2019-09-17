@@ -192,6 +192,21 @@ for h in h01 h02 h03 ; do
 done
 ```
 
+### uses
+
+- system monitor?
+  - htop/iostat/ifstat/etc. output on secondary
+  - aggregate views w/tmux
+- ring buffer with sponge
+- ripple i/o loops
+- broadcast/subscription/todo system?
+- combine with
+  - pbcopy/pbpaste on macos
+  - xclip/xsel on linux
+  - hterm utils on chrome os (https://chromium.googlesource.com/apps/libapps/+/master/hterm/etc)
+  - ??? on windows
+- daemon/service/plugins for whatever programs for centralized clipping
+
 ### todo
 
 - debug environment var - run vs build time
@@ -213,9 +228,7 @@ done
 - real supervisor instead of shell loops?
 - network of clipboards? local service, master service with broadcast, distribution?
 - actual c/go/rust service process?
-- ssh client mutual auth/verification from server
-- lock/unlock around copy? probably, but race-y
-  - autolock bool
+- libssh2 server?
 - multiple clipboards?
   - multiple copy/paste is ugh, complicates input
   - use as undo? implicit/explicit?
@@ -246,21 +259,22 @@ done
   - dropbear
   - settings
   - history/log files
-
-### uses
-
-- system monitor?
-  - htop/iostat/ifstat/etc. output on secondary
-  - aggregate views w/tmux
-- ring buffer with sponge
-- ripple i/o loops
-- broadcast/subscription/todo system?
-- combine with
-  - pbcopy/pbpaste on macos
-  - xclip/xsel on linux
-  - hterm utils on chrome os (https://chromium.googlesource.com/apps/libapps/+/master/hterm/etc)
-  - ??? on windows
-- daemon/service/plugins for whatever programs for centralized clipping
+- ssh server options variable (disable password on dropbear, etc.)
+- 'clip' local script
+  - cliplocal? clipin/clipout?
+  - '-s' sychronize x11 clipboard/primary
+  - x11: xclip (or xsel)
+  - chrome os: osc52.sh
+  - macos: pbcopy/pbpaste
+  - windows: clip.exe, winclip from putty, doit
+  - wsl?
+  - screen/tmux: copy buffers?
+  - clip (w/-i,-o,-s), clipin, clipout
+  - separate out common script headers
+  - cliplocal var (xsel, xclip, ...)
+- loadkeys (import keys from dumpkeys)
+- backup grab configs from /data/vnc/?
+- history separation in to YYYY/MM/DD/HH/MM/SS/N nanosecond format
 
 ### links
 
