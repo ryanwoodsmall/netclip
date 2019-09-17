@@ -206,6 +206,7 @@ elif \$(is_chromeos) ; then
     cincmd=osc52.sh
   else
     echo \"no osc52.sh found\"
+    exit 1
   fi
 elif \$(is_linux) ; then
   if \$(has_xclip) ; then
@@ -216,6 +217,7 @@ elif \$(is_linux) ; then
     coutcmd=\"xsel --output --clipboard\"
   else
     echo \"no xclip or xsel found\"
+    exit 1
   fi
 elif \$(is_windows) ; then
   echo yep
