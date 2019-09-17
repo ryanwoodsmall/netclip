@@ -283,6 +283,7 @@ done
 - gpg sign history?
 - associate clip with ssh pubkey some how
 - stack: clipboard->primary->secondary
+- private keys? for external sync
 
 ### links
 
