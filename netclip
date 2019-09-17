@@ -178,7 +178,7 @@ while getopts :ios opt ; do
   esac
 done
 is_chromeos() {
-  grep -q \"^CHROMEOS_\" /etc/lsb-release
+  test -e /etc/lsb-release && grep -q \"^CHROMEOS_\" /etc/lsb-release
 }
 is_linux() {
   uname -s | grep -qi \"^linux\"
