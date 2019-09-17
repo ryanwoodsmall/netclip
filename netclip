@@ -140,7 +140,7 @@ function scriptcommon() {
 
 function sc() {
   echo "$(scriptcommon)
-cat /dev/stdin | \${clipssh} \${clipsshopts} \${cliphost} ${clipprog} copy
+\${clipssh} \${clipsshopts} \${cliphost} ${clipprog} copy
 " | dos2unix
 }
 
@@ -239,7 +239,7 @@ if [[ \${clipmode} == i ]] ; then
     echo \"cannot copy to local clipboard on this platform\"
     exit 1
   fi
-  cat /dev/stdin | \${cincmd}
+  \${cincmd}
   if [[ \${clipsync} == 1 ]] ; then
     if [[ \${cincmd} =~ x(clip|sel) ]] ; then
       \${coutcmd} | \${cincmd//clipboard/primary}
@@ -257,7 +257,7 @@ fi
 
 function localclipin() {
   echo "$(scriptcommon)
-cat /dev/stdin | localclip -i
+localclip -i
 " | dos2unix
 }
 
