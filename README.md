@@ -284,6 +284,7 @@ done
 - associate clip with ssh pubkey some how
 - stack: clipboard->primary->secondary
 - private keys? for external sync
+- zero clipboards on xvfb start with `echo -n`
 
 ### links
 
