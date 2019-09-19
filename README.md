@@ -210,11 +210,6 @@ done
 - ring buffer with sponge
 - ripple i/o loops
 - broadcast/subscription/todo system?
-- combine with
-  - pbcopy/pbpaste on macos
-  - xclip/xsel on linux
-  - hterm utils on chrome os (https://chromium.googlesource.com/apps/libapps/+/master/hterm/etc)
-  - ??? on windows
 - daemon/service/plugins for whatever programs for centralized clipping
 
 ### todo
@@ -237,6 +232,11 @@ done
 - real supervisor instead of shell loops?
 - network of clipboards? local service, master service with broadcast, distribution?
 - actual c/go/rust service process?
+  - ssh replacement to gen a single binary?
+  - i/o is the easy part
+  - go: crypto/ssh and https://github.com/gliderlabs/ssh
+    - garbage collection?
+  - c: libssh2
 - libssh2 server?
 - multiple clipboards?
   - multiple copy/paste is ugh, complicates input
@@ -269,11 +269,13 @@ done
   - settings
   - history/log files
 - localclip/localclipin/localclipout
-  - windows: clip.exe, `powershell.exe Get-Clipboard`, winclip from putty, doit
-  - wsl?
+  - windows/wsl: clip.exe, `powershell.exe Get-Clipboard`, winclip from putty, doit
+    - https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-clipboard
+    - https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.management/set-clipboard
+    - probably need raw fo Get-Clipboard
+    - clip.exe -> `powershell.exe Set-Clipboard -Value "..."`?
+    - of course 
   - screen/tmux: copy buffers?
-  - clip (w/-i,-o,-s), clipin, clipout
-  - cliplocal var (xsel, xclip, ...)
 - loadkeys (import keys from dumpkeys)
 - backup - grab configs from /data/vnc/?
 - history - separation in to YYYY/MM/DD/HH/MM/SS/N nanosecond format
@@ -286,6 +288,7 @@ done
 - private keys? for external sync
 - zero clipboards on xvfb start with `echo -n`
 - move to `rbash`
+- dumpkeys is copying but not pasting, not sure why
 
 ### links
 
