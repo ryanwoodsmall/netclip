@@ -285,6 +285,7 @@ done
 - stack: clipboard->primary->secondary
 - private keys? for external sync
 - zero clipboards on xvfb start with `echo -n`
+- move to `rbash`
 
 ### links
 
