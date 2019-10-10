@@ -289,6 +289,7 @@ done
 - zero clipboards on xvfb start with `echo -n`
 - move to `rbash`
 - dumpkeys is copying but not pasting, not sure why
+- ability to connect to "real"/existing x-window display via custom `DISPLAY=` setting & no xvfb
 
 ### links
 
