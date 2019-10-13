@@ -290,6 +290,7 @@ done
 - move to `rbash`
 - dumpkeys is copying but not pasting, not sure why
 - ability to connect to "real"/existing x-window display via custom `DISPLAY=` setting & no xvfb
+- default cincmd/coutcmd to sc/sp in localclip script?
 
 ### links
 
