@@ -225,9 +225,6 @@ elif \$(is_linux || is_bsd) ; then
   elif \$(has_xsel) ; then
     test \"\${cincmd}\" == none && cincmd=\"xsel --input --clipboard\"
     test \"\${coutcmd}\" == none && coutcmd=\"xsel --output --clipboard\"
-  else
-    echo \"no xclip or xsel found\"
-    exit 1
   fi
 elif \$(is_windows) ; then
   test \"\${cincmd}\" == none && cincmd=clip.exe
