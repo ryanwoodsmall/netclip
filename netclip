@@ -211,9 +211,6 @@ if \$(is_macos) ; then
 elif \$(is_chromeos) ; then
   if \$(has_osc52sh) ; then
     test \"\${cincmd}\" == none && cincmd=osc52.sh
-  else
-    echo \"no osc52.sh found\"
-    exit 1
   fi
 elif \$(is_wsl) ; then
   test \"\${cincmd}\" == none && cincmd=clip.exe
@@ -235,6 +232,9 @@ fi
 if [[ \${clipmode} == i ]] ; then
   if [[ \${cincmd} == none ]] ; then
     echo \"cannot copy to local clipboard on this platform\"
+    if \$(is_linux || is_bsd) ; then
+      echo \"install xsel/xclip on linux/bsd or osc52.sh on chromeos\"
+    fi
     exit 1
   fi
   \${cincmd}
@@ -246,6 +246,9 @@ if [[ \${clipmode} == i ]] ; then
 elif [[ \${clipmode} == o ]] ; then
   if [[ \${coutcmd} == none ]] ; then
     echo \"cannot paste from local clipboard on this platform\"
+    if \$(is_linux || is_bsd) ; then
+      echo \"install xsel/xclip on linux/bsd\"
+    fi
     exit 1
   fi
   \${coutcmd}
