@@ -26,7 +26,7 @@ COPY netclip /
 RUN chmod 755 /*.sh \
     && apk --no-cache update \
     && apk --no-cache upgrade \
-    && apk --no-cache add bash coreutils busybox-extras busybox-initscripts dropbear file openbox openssh-keygen openssl procps psmisc sudo tini vim x11vnc xclip xinit xsetroot xterm xvfb \
+    && apk --no-cache add bash coreutils busybox-extras busybox-initscripts dropbear file openbox openssh-keygen openssl procps psmisc sudo tini vim x11vnc xclip xinit xsetroot xterm xvfb curl \
     && rm -f /bin/sh \
     && ln -s /bin/bash /bin/sh \
     && ln -s /netclip /clip \
