@@ -67,6 +67,7 @@ cmdinfo["localclip"]="show localclip script"
 cmdinfo["localclipin"]="show localclip stdin script"
 cmdinfo["localclipout"]="show localclip stdout script"
 cmdinfo["copysync"]="show script to copy to both network and local clipboard"
+cmdinfo["update"]="update netclip scripts"
 
 # selection buffers
 selections=( 'clipboard' 'primary' 'secondary' )
@@ -441,6 +442,18 @@ function showautolock() {
 
 function checkautolock() {
   showautolock | grep -q '^1$'
+}
+
+function update() {
+  local r="https://github.com/ryanwoodsmall/netclip"
+  local b="master"
+  local p="raw/${b}"
+  local s
+  for s in netclip {dropbear,startup,x11vnc,xvfb}.sh ; do
+    curl -kLs "${r}/${p}/${s}" | sudo tee /${s} >/dev/null 2>&1
+    chmod 755 /${s}
+  done
+  unset r b p s
 }
 
 if [ ${#} -lt 1 ] ; then

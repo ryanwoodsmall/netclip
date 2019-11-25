@@ -274,7 +274,7 @@ done
     - https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.management/set-clipboard
     - probably need raw fo Get-Clipboard
     - clip.exe -> `powershell.exe Set-Clipboard -Value "..."`?
-    - of course 
+    - of course
   - screen/tmux: copy buffers?
 - loadkeys (import keys from dumpkeys)
 - backup - grab configs from /data/vnc/?
