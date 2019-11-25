@@ -450,6 +450,7 @@ function update() {
   local p="raw/${b}"
   local s
   for s in netclip {dropbear,startup,x11vnc,xvfb}.sh ; do
+    echo "updating ${s}"
     curl -kLs "${r}/${p}/${s}" | sudo tee /${s} >/dev/null 2>&1
     sudo chmod 755 /${s}
     sudo chown root:root /${s}
