@@ -451,7 +451,8 @@ function update() {
   local s
   for s in netclip {dropbear,startup,x11vnc,xvfb}.sh ; do
     curl -kLs "${r}/${p}/${s}" | sudo tee /${s} >/dev/null 2>&1
-    chmod 755 /${s}
+    sudo chmod 755 /${s}
+    sudo chown root:root /${s}
   done
   unset r b p s
 }
