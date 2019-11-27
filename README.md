@@ -53,6 +53,7 @@ usage: /netclip [cmd]
      clipboardin: manipulate clipboard selection stdin
     clipboardout: manipulate clipboard selection stdout
             copy: copy stdin to the clipboard
+        copysync: show script to copy to both network and local clipboard
          delhist: read a history entry from stdin and delete it
           delkey: read a key number from stdin and delete it
          delpass: delete the stored password file
@@ -87,6 +88,7 @@ usage: /netclip [cmd]
         showuser: show the ssh clipboard user
               sp: show network paste script
           unlock: mark the clipboard as read-write
+          update: update netclip scripts
 ```
 
 ## build
