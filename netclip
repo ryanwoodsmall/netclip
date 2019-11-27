@@ -444,6 +444,7 @@ function checkautolock() {
   showautolock | grep -q '^1$'
 }
 
+# XXX - this should probably be in a separate script that's exec'ed since it rewrites itself
 function update() {
   local r="https://github.com/ryanwoodsmall/netclip"
   local b="master"
