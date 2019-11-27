@@ -449,13 +449,17 @@ function update() {
   local b="master"
   local p="raw/${b}"
   local s
+  sudo apk update
+  for a in curl moreutils ; do
+    sudo apk info | grep -q "^${a}$" || sudo apk add ${a}
+  done
   for s in netclip {dropbear,startup,x11vnc,xvfb}.sh ; do
     echo "updating ${s}"
-    curl -kLs "${r}/${p}/${s}" | sudo tee /${s} >/dev/null 2>&1
+    curl -kLs "${r}/${p}/${s}" | sudo sponge /${s} >/dev/null 2>&1
     sudo chmod 755 /${s}
     sudo chown root:root /${s}
   done
-  unset r b p s
+  unset r b p s a
 }
 
 if [ ${#} -lt 1 ] ; then
