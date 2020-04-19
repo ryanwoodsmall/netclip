@@ -293,6 +293,7 @@ done
 - dumpkeys is copying but not pasting, not sure why
 - ability to connect to "real"/existing x-window display via custom `DISPLAY=` setting & no xvfb
 - default cincmd/coutcmd to sc/sp in localclip script?
+- convert to 9p w/c9 and/or 9pro https://github.com/ftrvxmtrx/c9 and https://github.com/ftrvxmtrx/9pro
 
 ### links
 
