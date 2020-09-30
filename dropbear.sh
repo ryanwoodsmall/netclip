@@ -4,6 +4,7 @@ echo -n > ${l}
 while true ; do
   u="$(cat ${clipdata}/user)"
   p="$(cat ${clipdata}/clipport)"
+  chown ${u} ${l}
   echo "${0}: starting dropbear"
   echo "user: ${u}"
   test -e ${clipdata}/passwd && {

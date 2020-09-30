@@ -5,6 +5,7 @@ while true ; do
   echo "${0}: starting Xvfb"
   u="$(cat ${clipdata}/user)"
   s="$(cat ${clipdata}/clipscreen)"
+  chown ${u} ${l}
   test -e /tmp/.X${s}-lock && rm -f /tmp/.X${s}-lock
   su - ${u} -c ". /etc/profile ; /usr/bin/xinit -- /usr/bin/Xvfb :${s} -screen 0 1366x768x24" 2>&1 | tee -a ${l}
   sleep 1

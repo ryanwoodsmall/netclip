@@ -7,6 +7,7 @@ while true ; do
   s="$(cat ${clipdata}/clipscreen)"
   u="$(cat ${clipdata}/user)"
   h="$(getent passwd ${u} | awk -F: '{print $(NF-1)}')"
+  chown ${u} ${l}
   su - ${u} -c ". /etc/profile ; /usr/bin/x11vnc -localhost -listen localhost -xkb -noxrecord -noxfixes -noxdamage -display :${s} -forever -rfbauth ${h}/.vnc/passwd -users ${u} -rfbport ${p}" 2>&1 | tee -a ${l}
   sleep 1
 done
