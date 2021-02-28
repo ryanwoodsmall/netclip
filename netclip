@@ -43,6 +43,7 @@ cmdinfo["setpass"]="read new password from stdin"
 cmdinfo["enhist"]="enable capturing clipboard history"
 cmdinfo["dishist"]="disable capturing clipboard history"
 cmdinfo["listkeys"]="show known ssh authorized keys"
+cmdinfo["listrawkeys"]="show ssh authorized_keys file"
 cmdinfo["delkey"]="read a key number from stdin and delete it"
 cmdinfo["netclip"]="show netclip control script"
 cmdinfo["install"]="show install script for netclip/sc/sp"
@@ -346,6 +347,10 @@ function listkeys() {
     ((c+=1))
     echo
   done
+}
+
+function listrawkeys() {
+  cat ${sshauthkeys}
 }
 
 function delkey() {
