@@ -8,12 +8,12 @@ FROM alpine
 # - x11: 6000
 # - vnc: 5900
 # - ssh: 22
-ENV vncport 11900
-ENV clipport 11922
-ENV clipscreen 99
-ENV clipuser clippy
-ENV cliphome /home/${clipuser}
-ENV clipdata /data/clip
+ENV vncport=11900
+ENV clipport=11922
+ENV clipscreen=99
+ENV clipuser=clippy
+ENV cliphome=/home/${clipuser}
+ENV clipdata=/data/clip
 
 EXPOSE ${clipport}
 
