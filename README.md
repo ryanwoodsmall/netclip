@@ -282,6 +282,8 @@ done
 - loadkeys (import keys from dumpkeys)
 - backup - grab configs from /data/vnc/?
 - history - separation in to YYYY/MM/DD/HH/MM/SS/N nanosecond format
+  - UUID for filename?
+  - sqlite db w/sha256sum/index for dedupe?
 - ssh keys - show fingerprints
 - make sc/sp/etc. script symlinks to netclip client
 - base64 encode everything?
