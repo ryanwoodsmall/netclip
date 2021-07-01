@@ -50,8 +50,8 @@ usage: /netclip [cmd]
           addkey: add an ssh key from stdin
            clear: clear the contents of the clipboard
        clearhist: clear all history entries
-     clipboardin: manipulate clipboard selection stdin
-    clipboardout: manipulate clipboard selection stdout
+     clipboardin: manipulate clipboard selection stdin (abbrev: ci)
+    clipboardout: manipulate clipboard selection stdout (abbrev: co)
             copy: copy stdin to the clipboard
         copysync: show script to copy to both network and local clipboard
          delhist: read a history entry from stdin and delete it
@@ -67,18 +67,19 @@ usage: /netclip [cmd]
          install: show install script for netclip/sc/sp
         listhist: list any existing history entries
         listkeys: show known ssh authorized keys
+     listrawkeys: show ssh authorized_keys file
        localclip: show localclip script
      localclipin: show localclip stdin script
     localclipout: show localclip stdout script
             lock: mark the clipboard as read-only
          netclip: show netclip control script
            paste: paste the clipboard to stdout
-       primaryin: manipulate primary selection stdin
-      primaryout: manipulate primary selection stdout
+       primaryin: manipulate primary selection stdin (abbrev: pi)
+      primaryout: manipulate primary selection stdout (abbrev: po)
             reap: kill any lingering xclip processes
               sc: show network copy script
-     secondaryin: manipulate secondary selection stdin
-    secondaryout: manipulate secondary selection stdout
+     secondaryin: manipulate secondary selection stdin (abbrev: si)
+    secondaryout: manipulate secondary selection stdout (abbrev: so)
          setpass: read new password from stdin
     showautolock: show the clipboard autolocking status
         showhist: show the clipboard history status
