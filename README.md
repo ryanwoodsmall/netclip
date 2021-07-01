@@ -280,7 +280,6 @@ done
     - of course
   - screen/tmux: copy buffers?
 - loadkeys (import keys from dumpkeys)
-- backup - grab configs from /data/vnc/?
 - history - separation in to YYYY/MM/DD/HH/MM/SS/N nanosecond format
   - UUID for filename?
   - sqlite db w/sha256sum/index for dedupe?
@@ -299,7 +298,23 @@ done
 - convert to 9p w/c9 (https://git.sr.ht/~ft/c9) and/or 9pro (https://git.sr.ht/~ft/9pro)
 - rename `copy` and `paste` with "net" prefix to avoid conflict with `/usr/bin/paste`
 - host key dump - `/etc/dropbear` in .tar?
-- full backup/restore - `/data/clip` and `/home/clippy` and `/etc/dropbear` in .tar?
+- full backup/restore - `/data/clip` and `/data/vnc`(?) and `/home/clippy` and `/etc/dropbear` and ??? in .tar?
+- pastebin-like web+url generation w/history
+  - expiry is ugly
+  - content-addressable (ish) with sha-256 (-512? b2sum? b3sum?) sums as key, data as value
+    - i.e., `/data/persist/$sum/content`
+    - combine w/cliphistory dated log dir files+symlinks for historical-ish tracking
+    - current clipboard, primary, secondary aliases for in-memory clipboard
+  - store uuid along with hash?
+    - every file only has one sha-### sum
+    - uuid is equally unique
+    - but a uuid with a collection of sums could represent a bundle of files - i.e., .tar or similar
+  - version with `.#` extension?
+    - only makes sense with uuid/hash sum mapping
+    - would have to do tombstones when a file is removed from a bundle at a version
+    - woof
+  - just use venti, man
+    - or nix or guix or...
 - i need to rip some of this shit out
 
 ### links
