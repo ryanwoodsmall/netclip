@@ -296,6 +296,9 @@ done
 - default cincmd/coutcmd to sc/sp in localclip script?
 - convert to 9p w/c9 (https://git.sr.ht/~ft/c9) and/or 9pro (https://git.sr.ht/~ft/9pro)
 - rename `copy` and `paste` with "net" prefix to avoid conflict with `/usr/bin/paste`
+- host key dump - `/etc/dropbear` in .tar?
+- full backup/restore - `/data/clip` and `/home/clippy` and `/etc/dropbear` in .tar?
+- i need to rip some of this shit out
 
 ### links
 
