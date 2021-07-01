@@ -31,6 +31,7 @@ test -e ${sshauthkeys} || touch ${sshauthkeys}
 chmod 700 ${sshdir}
 chmod 600 ${sshauthkeys}
 
+declare -a funclist=()
 declare -A cmdinfo
 cmdinfo["copy"]="copy stdin to the clipboard"
 cmdinfo["paste"]="paste the clipboard to stdout"
@@ -76,16 +77,23 @@ selections=( 'clipboard' 'primary' 'secondary' )
 directions=( 'in' 'out' )
 # build functions
 for s in ${selections[@]} ; do
+  e="${s:0:1}"
   for d in ${directions[@]} ; do
+    i="${d:0:1}"
+    short="${e}${i}"
     eval "
       function ${s}${d}() {
         xclip -${d} -selection ${s}
       }
+      function ${short}() {
+        ${s}${d}
+      }
     "
-    cmdinfo["${s}${d}"]="manipulate ${s} selection std${d}"
+    funclist+=( ${short} )
+    cmdinfo["${s}${d}"]="manipulate ${s} selection std${d} (abbrev: ${short})"
   done
 done
-funclist=( $(echo ${!cmdinfo[@]}) )
+funclist+=( $(echo ${!cmdinfo[@]}) )
 funcstring="$(echo ${funclist[@]} | xargs echo | tr -s ' ' | sed 's/ / | /g')"
 
 function usage() {
