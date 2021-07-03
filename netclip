@@ -294,13 +294,13 @@ function install() {
   echo "$(scriptcommon)
 mkdir -p \${clipinst}
 rm -f \${clipinst}/{netclip,s{c,p},localclip{,{in,out}},copysync}
-echo '$(netclip)' > \${clipinst}/netclip
-echo '$(sc)' > \${clipinst}/sc
-echo '$(sp)' > \${clipinst}/sp
-echo '$(localclip)' > \${clipinst}/localclip
-echo '$(localclipin)' > \${clipinst}/localclipin
-echo '$(localclipout)' > \${clipinst}/localclipout
-echo '$(copysync)' > \${clipinst}/copysync
+echo '$(netclip)' > \"\${clipinst}/netclip\"
+echo '$(sc)' > \"\${clipinst}/sc\"
+echo '$(sp)' > \"\${clipinst}/sp\"
+echo '$(localclip)' > \"\${clipinst}/localclip\"
+echo '$(localclipin)' > \"\${clipinst}/localclipin\"
+echo '$(localclipout)' > \"\${clipinst}/localclipout\"
+echo '$(copysync)' > \"\${clipinst}/copysync\"
 chmod 755 \${clipinst}/{netclip,s{c,p},localclip{,{in,out}},copysync}
 " | dos2unix
 }
