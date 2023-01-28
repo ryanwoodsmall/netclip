@@ -217,6 +217,10 @@ done
 
 ### todo
 
+- probably need a `clipproxycmd` setting
+  - `nc`, `socat`, or similar to encapsulate SSH in HTTPS, act as VPN, etc.
+  - can do this easily with `~/.ssh/config` for OpenSSH, not so much for Dropbear
+  - wrapper script might be enough and is much simpler
 - debug environment var - run vs build time
 - debug x11vnc should run as debug user connecting to clippy xvfb? xhost?
 - just remove vnc stuff for now?
