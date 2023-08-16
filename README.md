@@ -324,7 +324,16 @@ done
     - woof
   - just use venti, man
     - or nix or guix or...
+  - wow: https://github.com/golang-design/clipboard and https://github.com/changkun/midgard
 - i need to rip some of this shit out
+- ooh, small xclipd/xclipin/xclipout: https://github.com/phillbush/xcliputils
+- stripped down container with only bash+xvfb+tinysshd+xclipd+tr+fold+printf+tee+sponge+...
+  - replace as much as possible w/pure bash; `echo` -> `>>>` ???
+  - ed25519 only!
+    - ssh keys are the _only_ state; negative features.
+    - dropbearkey for generation
+  - other utilities? date, tee, grep, ...
+  - decrease attack surface significantly
 
 ### links
 
