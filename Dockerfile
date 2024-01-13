@@ -24,9 +24,36 @@ COPY startup.sh /
 COPY netclip /
 
 RUN chmod 755 /*.sh \
-    && apk --no-cache update \
     && apk --no-cache upgrade \
-    && apk --no-cache add bash coreutils busybox-extras busybox-initscripts dropbear file openbox openssh-keygen openssl procps psmisc sudo tini vim x11vnc xclip xinit xsetroot xterm xvfb curl \
+    && apk --no-cache add \
+       bash \
+       busybox-extras \
+       coreutils \
+       curl \
+       dmenu \
+       doas \
+       dropbear \
+       dropbear-convert \
+       dropbear-dbclient \
+       dropbear-scp \
+       dropbear-ssh \
+       dwm \
+       file \
+       openbox \
+       openssh-keygen \
+       openssl \
+       procps \
+       psmisc \
+       st \
+       sudo \
+       tini \
+       vim \
+       x11vnc \
+       xclip \
+       xinit \
+       xsetroot \
+       xterm \
+       xvfb \
     && rm -f /bin/sh \
     && ln -s /bin/bash /bin/sh \
     && ln -s /netclip /clip \
@@ -53,7 +80,11 @@ RUN chmod 755 /*.sh \
     && echo 'exec openbox' >> ${cliphome}/.xinitrc \
     && chmod 755 ${cliphome}/.x* \
     && chown -R ${clipuser}:${clipuser} ${cliphome} ${clipdata} /etc/dropbear \
-    && chmod 640 ${clipdata}/*
+    && chmod 640 ${clipdata}/* \
+    && test -e /etc/motd && cat /etc/motd > /etc/motd.ORIG || true \
+    && rm -f /etc/motd || true \
+    && cat /etc/doas.conf > /etc/doas.conf.ORIG \
+    && echo "permit nopass ${clipuser}" >> /etc/doas.conf
 
 ## to debug x11/xvfb/xclip/vnc/x11vnc
 #EXPOSE ${vncport}
@@ -61,7 +92,8 @@ RUN chmod 755 /*.sh \
 #    && adduser -D -S -G wheel -s /bin/bash debug \
 #    && echo "debug:$(cat ${clipdata}/debug)" | chpasswd \
 #    && chmod 640 ${clipdata}/* \
-#    && sed -i '/x11vnc/s/#//g' /startup.sh
+#    && sed -i '/x11vnc/s/#//g' /startup.sh \
+#    && apk --no-cache add font-terminus font-inconsolata font-dejavu font-noto font-noto-cjk font-awesome font-noto-extra
 
 ENTRYPOINT ["/sbin/tini","-gwvv","--"]
 

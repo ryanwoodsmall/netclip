@@ -16,6 +16,6 @@ while true ; do
     echo "debug: $(cat ${clipdata}/debug)"
   }
   rm -f /var/run/dropbear.pid
-  su - ${u} -c "/usr/sbin/dropbear -R -F -E -w -j -k -p ${p}" 2>&1 | tee -a ${l}
+  su - ${u} -c "/usr/sbin/dropbear -R -F -E -w -j -k -m -p ${p}" 2>&1 | tee -a ${l}
   sleep 1
 done
