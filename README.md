@@ -54,6 +54,7 @@ usage: /netclip [cmd]
     clipboardout: manipulate clipboard selection stdout (abbrev: co)
             copy: copy stdin to the clipboard
         copysync: show script to copy to both network and local clipboard
+             cut: alias for copy
          delhist: read a history entry from stdin and delete it
           delkey: read a key number from stdin and delete it
          delpass: delete the stored password file

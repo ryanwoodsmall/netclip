@@ -70,6 +70,7 @@ cmdinfo["localclipin"]="show localclip stdin script"
 cmdinfo["localclipout"]="show localclip stdout script"
 cmdinfo["copysync"]="show script to copy to both network and local clipboard"
 cmdinfo["update"]="update netclip scripts"
+cmdinfo["cut"]="alias for copy"
 
 # selection buffers
 selections=( 'clipboard' 'primary' 'secondary' )
@@ -486,6 +487,7 @@ fi
 case "${1}" in
   help) usage ;;
   clear) clearclip ;;
+  cut) copy ;;
   *)
     # check for and run a like-named function if we have one in our list
     if $(echo ${funclist[@]} | tr -s ' ' | tr ' ' '\n' | grep -q "^${1}$") ; then
