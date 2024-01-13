@@ -41,6 +41,7 @@ RUN chmod 755 /*.sh \
        file \
        openbox \
        openssh-keygen \
+       openssh-sftp-server \
        openssl \
        procps \
        psmisc \
