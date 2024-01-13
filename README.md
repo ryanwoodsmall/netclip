@@ -220,6 +220,8 @@ done
 
 - probably need a `clipproxycmd` setting
   - `nc`, `socat`, or similar to encapsulate SSH in HTTPS, act as VPN, etc.
+    - anonymous (insecure!) tls server: `socat openssl-listen:11944,reuseaddr,fork,cert=/cert.pem,verify=0 tcp4-connect:${cliphost}:11922`
+    - anonymous (insecure!) tls client: `socat - openssl-connect:${tlsserver}:11944,verify=0`
   - can do this easily with `ProxyCommand` in `~/.ssh/config` for OpenSSH, Dropbear with `-J` option
   - wrapper script might be enough and is much simpler
     - works better with `dbclent -J...` as well without having to do coprocess/filedescriptor stuff
