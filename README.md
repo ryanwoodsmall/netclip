@@ -292,6 +292,9 @@ done
   - UUID for filename?
   - sqlite db w/sha256sum/index for dedupe?
 - ssh keys - show fingerprints
+  - use fingerprints for trusted pubkey removal instead of jank number system thing
+  - `ssh-keygen -l -f - < /tmp/individual.pubkey`
+  - also works with `~/.ssh/authorized_keys` or other textual key lists
 - make sc/sp/etc. script symlinks to netclip client
 - base64 encode everything?
 - gpg sign history?
